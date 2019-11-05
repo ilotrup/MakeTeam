@@ -10,7 +10,7 @@ namespace maketeam.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Mensaje = "Hola";
+            ViewBag.Mensaje = "Hola todo bien";
             return View();
         }
 
