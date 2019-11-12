@@ -17,7 +17,7 @@ namespace maketeam.Controllers
             return View();
         }
 
-        public ActionResult Validar(Usuario User)
+        public ActionResult ValidarI(Usuario User)
         {
 
             if (!ModelState.IsValid)
@@ -37,9 +37,38 @@ namespace maketeam.Controllers
                 }
 
             }
+        }
 
+        public ActionResult ValidarR(Usuario User)
+        {
 
+            if (!ModelState.IsValid)
+            {
+                return View("Registrar", User);
+            }
+            else
+            {
+                bool regis = true; //BD.Validardatos;
+                if (regis == true)
+                {
 
+                    bool registro = true; //BD.Registrarse(User);
+                    if (registro == true)
+                    {
+                        return RedirectToAction("Index", "BackOffice", User);
+                    }
+                    else
+                    {
+                        return View("Registrar", User);
+                    }
+                }
+                else
+                {
+                    return View("Registrar", User);
+                }
+
+            }
+ 
         }
 
         public ActionResult IniciarSesion()
@@ -49,6 +78,21 @@ namespace maketeam.Controllers
 
         public ActionResult Registrar()
         {
+
+            List<Localidad> sex = new List<Localidad>();
+            sex.Add(new Localidad("Masculino"));
+            sex.Add(new Localidad("Femenino"));
+            ViewBag.sex = sex;
+
+            List<Localidad> loc = new List<Localidad>();
+            loc.Add(new Localidad("Avellaneda"));
+            loc.Add(new Localidad("Balvanera"));
+            loc.Add(new Localidad("Recoleta"));
+            loc.Add(new Localidad("Palermo"));
+            loc.Add(new Localidad("Paternal"));
+            loc.Add(new Localidad("Caballito"));
+            ViewBag.loc = loc;
+
             return View();
         }
 
