@@ -29,7 +29,6 @@ namespace maketeam.Models
             consulta.CommandType = System.Data.CommandType.Text;
             consulta.CommandText = "Select * from Usuarios where NombreDeUsuario LIKE '" + User.NombreDeUsuario + "' and Contraseña LIKE '" + User.Contraseña + "'";
             SqlDataReader lector = consulta.ExecuteReader();
-            Usuario Us = new Usuario();
             if (lector.Read())
             {
                 Logueado = true;
@@ -49,42 +48,61 @@ namespace maketeam.Models
             consulta.CommandType = System.Data.CommandType.Text;
             consulta.CommandText = "Select * from Usuarios where NombreDeUsuario = '" + User.NombreDeUsuario + "'";
             SqlDataReader lector = consulta.ExecuteReader();
-            Usuario Us = new Usuario();
             if (lector.Read())
             {
                 Validar = false;
             }
             else
             {
-                Logueado = true;
+                Validar = true;
             }
 
             SqlCommand consulta2 = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
             consulta.CommandText = "Select * from Usuarios where CorreoElectronico = '" + User.CorreoElectronico + "'";
-            SqlDataReader lector = consulta.ExecuteReader();
-            Usuario Us = new Usuario();
-            if (lector.Read())
+            SqlDataReader Lector = consulta.ExecuteReader();
+            if (Lector.Read())
             {
                 Validar = false;
             }
             else
             {
-                Logueado = true;
+                Validar = true;
             }
-
+            Con.Close();
             return Validar;
         }
+
         public static void Registrarse(Usuario User)
         {
-            bool Registrado;
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
             consulta.CommandText = "INSERT into Usuarios(IDUsuario,NombreDeUsuario,CorreoElectronico," +
                 "Contraseña,Edad,Localidad,Sexo) values ('" + User.NombreDeUsuario + "','" + User.CorreoElectronico + "'," +
                 "'" + User.Contraseña + "','" + User.Edad + "','"  + User.Localidad + "','" + User.Sexo + "')";
-            SqlDataReader lector = consulta.ExecuteNonQuery();
+            consulta.ExecuteNonQuery();
+        }
+
+        public static void Traerusuario(int ID)
+        {
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "SELECT from Usuarios where IDUsuario = '" + ID + "'";
+            SqlDataReader lector = consulta.ExecuteReader();
+            Usuario User = new Usuario();
+            if (lector.Read())
+            {
+                int idusuario = Convert.ToInt32(lector["IDUsuario"]);
+                string nombreusuario = lector["TextoPregunta"].ToString();
+                string correoelectronico = lector["Dificultad"].ToString();
+                string contraseña = lector["IDUsuario"].ToString();
+                int edad = Convert.ToInt32(lector["TextoPregunta"]);
+                string localidad = lector["Dificultad"].ToString();
+                string sexo = lector["IDUsuario"].ToString();
+                User = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
+            }
         }
     }
 }
