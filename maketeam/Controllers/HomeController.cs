@@ -16,6 +16,36 @@ namespace maketeam.Controllers
             return View();
         }
 
+        public ActionResult Validar(Usuario User)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("IniciarSesion", User);
+            }
+            else
+            {
+                bool logueo = BD.Loguearse(User);
+                if (logueo == true)
+                {
+                    return RedirectToAction("Index", "BackOffice", User);
+                }
+                else
+                {
+                    return View("IniciarSesion", User);
+                }
+
+            }
+
+
+
+        }
+
+        public ActionResult IniciarSesion()
+        {
+            return View();
+        }
+
 
         public ActionResult About()
         {

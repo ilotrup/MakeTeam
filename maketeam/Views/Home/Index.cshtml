@@ -5,7 +5,10 @@
 <div class="rectangulo">
     <p>
         @ViewBag.descripcion1
-        <input type="submit" value="Iniciar sesion">
+        <a href='@Url.Action("IniciarSesion","Home")'>
+            <input type="submit" value="Iniciar sesion">
+        </a>
+        
     </p>
 </div>
 
