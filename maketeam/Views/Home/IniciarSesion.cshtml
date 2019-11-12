@@ -2,12 +2,12 @@
     ViewBag.Title = "Inciar Sesion";
 }
 
-@using maketeam.models
+@using maketeam.Models
 @model Usuario
 
 @using (Html.BeginForm("Validar", "Home", FormMethod.Post))
 {
-    <p>Usuario</p>@Html.TextBoxFor(model => model.Usuario)@Html.ValidationMessageFor(model => model.NombreUsuario) <br />
+    <p>Usuario</p>@Html.TextBoxFor(model => model.NombreDeUsuario)@Html.ValidationMessageFor(model => model.NombreDeUsuario) <br />
     <p>Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña) <br />
 
     <input type="submit" value="Iniciar Sesion">
