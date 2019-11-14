@@ -21,23 +21,45 @@ namespace maketeam.Models
             con.Close();
         }
 
-        public static Boolean Loguearse(Usuario User)
+        public static int Loguearse(Usuario User)
         {
+            int idus = -1;
             bool Logueado;
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "Select * from Usuarios where NombreDeUsuario LIKE '" + User.NombreDeUsuario + "' and Contraseña LIKE '" + User.Contraseña + "'";
+            consulta.CommandText = "Select IDUsuario from Usuarios where NombreDeUsuario LIKE '" + User.NombreDeUsuario + "' and Contraseña LIKE '" + User.Contraseña + "'";
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read())
             {
-                Logueado = true;
+
+                idus = Convert.ToInt32(lector["IDUsuario"]);
             }
-            else
+            
+            return idus;
+        }
+
+        public static Usuario TraerUsuario(int ID)
+        {
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "Select * from Usuarios where IDUsuario = " + ID;
+            SqlDataReader dataReader = consulta.ExecuteReader();
+            Usuario us = new Usuario();
+            while (dataReader.Read())
             {
-                Logueado = false;
+
+                us.IDUsuario = Convert.ToInt32(dataReader["IDUsuario"]);
+                us.Edad = Convert.ToInt32(dataReader["Edad"]);
+                us.NombreDeUsuario = dataReader["NombreDeUsuario"].ToString();
+                us.CorreoElectronico = dataReader["CorreoElectronico"].ToString();
+                us.Contraseña = dataReader["Contraseña"].ToString();
+                us.Localidad = dataReader["Localidad"].ToString();
+                us.Sexo = dataReader["Sexo"].ToString();
             }
-            return Logueado;
+            Con.Close();
+            return us;
         }
 
         public static Boolean ValidarDatos(Usuario User)

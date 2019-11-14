@@ -26,12 +26,12 @@ namespace maketeam.Controllers
             }
             else
             {
-                bool logueo = BD.Loguearse(User);
-                if (logueo == true)
+                int idus = BD.Loguearse(User);
+                if (idus > -1)
                 {
-                    return RedirectToAction("Index", "BackOffice", User);
+                    return View("Jugador", idus);
                 }
-                else
+                else 
                 {
                     return View("IniciarSesion", User);
                 }
@@ -48,19 +48,14 @@ namespace maketeam.Controllers
             }
             else
             {
-                bool regis = true; //BD.Validardatos;
+                bool regis =BD.ValidarDatos(User);
                 if (regis == true)
                 {
 
-                    bool registro = true; //BD.Registrarse(User);
-                    if (registro == true)
-                    {
-                        return RedirectToAction("Index", "BackOffice", User);
-                    }
-                    else
-                    {
-                        return View("Registrar", User);
-                    }
+                  BD.Registrarse(User);
+                    return View("IniciarSesion", User);
+                   
+                    
                 }
                 else
                 {
@@ -73,6 +68,7 @@ namespace maketeam.Controllers
 
         public ActionResult IniciarSesion()
         {
+
             return View();
         }
 
@@ -92,6 +88,14 @@ namespace maketeam.Controllers
             loc.Add(new Localidad("Paternal"));
             loc.Add(new Localidad("Caballito"));
             ViewBag.loc = loc;
+
+            return View();
+        }
+
+        public ActionResult Jugador(int idus)
+        {
+            ViewBag.Jugador = BD.TraerUsuario(idus);
+
 
             return View();
         }
