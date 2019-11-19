@@ -94,7 +94,6 @@ namespace maketeam.Models
             Con.Close();
             return Validar;
         }
-
         public static void Registrarse(Usuario User)
         {
             SqlConnection Con = Conectar();
@@ -126,5 +125,51 @@ namespace maketeam.Models
                 User = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
             }
         }
+
+        public static List<Equipo> TraerEquipos(int ID)
+        {
+            List<Equipo> Equipos = new List<Equipo>();
+            Equipo E = new Equipo();
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "select * from Equipos inner join" +
+                " EquiposXUsuario on Equipos.IDEquipo = EquiposXUsuario.IDEquipo where IDUsuario = '" + ID +"'";
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read())
+            {
+                int idequipo = Convert.ToInt32(lector["IDEquipo"]);
+                string nombreequipo = lector["NombreEquipo"].ToString();
+                E = new Equipo(idequipo, nombreequipo);
+                Equipos.Add(E);
+            }
+            Con.Close();
+            return Equipos;
+        }
+
+        public static void NuevoEquipo(string nombreequipo)
+        {
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "insert into Equipos(NombreEquipo) values ('" + nombreequipo + "')";
+            consulta.ExecuteNonQuery();
+            Con.Close();
+        }
+        public static void InsertarJugadores(List<Usuario> Lista,int ID)
+        {
+            foreach(Usuario E in Lista)
+            {
+                SqlConnection Con = Conectar();
+                SqlCommand consulta = Con.CreateCommand();
+                consulta.CommandType = System.Data.CommandType.Text;
+                consulta.CommandText = "insert into EquiposXUsuarios(IDUsuario,IDEquipo) values ('" + E.IDUsuario +"','" + ID + "')";
+                consulta.ExecuteNonQuery();
+                Con.Close();
+            }
+
+        }
+
+
     }
 }
