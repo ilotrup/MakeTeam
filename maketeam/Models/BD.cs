@@ -10,7 +10,7 @@ namespace maketeam.Models
     {
         private static SqlConnection Conectar()
         {
-            string constring = "Server=.; DataBase = MakeTeam; Trusted_Connection = true;";
+            string constring = "Server=.; DataBase = MakeTeam; User id=alumno; Password=alumno1;";
             SqlConnection a = new SqlConnection(constring);
             a.Open();
             return a;
@@ -24,18 +24,17 @@ namespace maketeam.Models
         public static int Loguearse(Usuario User)
         {
             int idus = -1;
-            bool Logueado;
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "Select IDUsuario from Usuarios where NombreDeUsuario LIKE '" + User.NombreDeUsuario + "' and Contraseña LIKE '" + User.Contraseña + "'";
+            consulta.CommandText = "Select * from Usuarios where NombreDeUsuario LIKE '" + User.NombreDeUsuario + "' and Contraseña LIKE '" + User.Contraseña + "'";
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read())
             {
 
                 idus = Convert.ToInt32(lector["IDUsuario"]);
             }
-            
+            Con.Close();
             return idus;
         }
 
@@ -68,7 +67,8 @@ namespace maketeam.Models
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "Select * from Usuarios where NombreDeUsuario = '" + User.NombreDeUsuario + "'";
+            consulta.CommandText = "Select * from Usuarios where" +
+                " NombreDeUsuario = '" + User.NombreDeUsuario + "'or CorreoElectronico = '" + User.CorreoElectronico + "'";
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read())
             {
@@ -78,20 +78,6 @@ namespace maketeam.Models
             {
                 Validar = true;
             }
-
-            SqlCommand consulta2 = Con.CreateCommand();
-            consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "Select * from Usuarios where CorreoElectronico = '" + User.CorreoElectronico + "'";
-            SqlDataReader Lector = consulta.ExecuteReader();
-            if (Lector.Read())
-            {
-                Validar = false;
-            }
-            else
-            {
-                Validar = true;
-            }
-            Con.Close();
             return Validar;
         }
         public static void Registrarse(Usuario User)
@@ -99,13 +85,13 @@ namespace maketeam.Models
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "INSERT into Usuarios(IDUsuario,NombreDeUsuario,CorreoElectronico," +
+            consulta.CommandText = "INSERT into Usuarios(NombreDeUsuario,CorreoElectronico," +
                 "Contraseña,Edad,Localidad,Sexo) values ('" + User.NombreDeUsuario + "','" + User.CorreoElectronico + "'," +
                 "'" + User.Contraseña + "','" + User.Edad + "','"  + User.Localidad + "','" + User.Sexo + "')";
             consulta.ExecuteNonQuery();
         }
 
-        public static void Traerusuario(int ID)
+        public static Usuario Traerusuario(int ID)
         {
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
@@ -124,6 +110,9 @@ namespace maketeam.Models
                 string sexo = lector["IDUsuario"].ToString();
                 User = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
             }
+            Con.Close();
+            return User;
+
         }
 
         public static List<Equipo> TraerEquipos(int ID)

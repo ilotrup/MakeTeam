@@ -2,26 +2,28 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="rectangulo">
-    <p>
-        @ViewBag.descripcion1
-        <a href='@Url.Action("IniciarSesion","Home")'>
-            <input type="submit" value="Iniciar sesion">
-        </a>
-        
-    </p>
-</div>
-
-<div class="rectangulo2">
-    <p>
-        @ViewBag.descripcion2
-        @ViewBag.descripcion22
-        <a href='@Url.Action("Registrar","Home")'>
-            <input type="submit" value="Registrarse">
+<body style ="background-image:url('/Content/Fondo.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;" >
+   
+    <div class="rectangulo">
+        <p>
+            @ViewBag.descripcion1
+            <a href='@Url.Action("IniciarSesion","Home")'>
+                <input type="submit" value="Iniciar sesion">
             </a>
-    </p>
-</div>
 
+        </p>
+    </div>
 
+    <div class="rectangulo2">
+        <p>
+            @ViewBag.descripcion2
+            @ViewBag.descripcion22
+            <a href='@Url.Action("Registrar","Home")'>
+                <input type="submit" value="Registrarse">
+            </a>
+        </p>
+    </div>
+
+</body>
 
 

@@ -7,14 +7,14 @@
 
 @using (Html.BeginForm("ValidarR", "Home", FormMethod.Post))
 {
-    @Html.HiddenFor(model => model.IDUsuario)
     <p>Usuario</p>@Html.TextBoxFor(model => model.NombreDeUsuario)@Html.ValidationMessageFor(model => model.NombreDeUsuario) <br />
     <p>Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña) <br />
     <p>Correo Electronico</p> @Html.TextBoxFor(model => model.CorreoElectronico)@Html.ValidationMessageFor(model => model.CorreoElectronico) <br />
     @Html.DropDownListFor(model => model.Sexo, new SelectList(ViewBag.sex, "Nombre", "Nombre"))
-    <p>Edad</p> @Html.PasswordFor(model => model.Edad)@Html.ValidationMessageFor(model => model.Edad) <br />
-    @Html.DropDownListFor(model => model.Localidad, new SelectList(ViewBag.loc,"Nombre", "Nombre"))
-   
+    <p>Edad</p> @Html.TextBoxFor(model => model.Edad)@Html.ValidationMessageFor(model => model.Edad) <br />
+    @Html.DropDownListFor(model => model.Localidad, new SelectList(ViewBag.loc, "Nombre", "Nombre"))
+
+
 
     <input type="submit" value="Registrar">
 }
