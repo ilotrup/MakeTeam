@@ -8,7 +8,6 @@ namespace maketeam.Models
 {
     public class Usuario
     {
-        [Required(ErrorMessage = "El usuario es obligatorio")]
         public int IDUsuario { get; set; }
         [Required(ErrorMessage = "El Nombre es obligatorio")]
         public string NombreDeUsuario { get; set; }

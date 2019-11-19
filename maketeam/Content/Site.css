@@ -1,8 +1,8 @@
 ﻿.rectangulo {
     width: 250px;
     height: 100px;
-    border: 3px solid #555;
-    background: #428bca;
+    opacity: 0.9;
+    background: white;
     display: inline-block;
     text-align: center;
     position: relative;

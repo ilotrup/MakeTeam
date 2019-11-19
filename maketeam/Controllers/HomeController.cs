@@ -14,7 +14,9 @@ namespace maketeam.Controllers
             ViewBag.Descripcion1 = "Guarda y accede a tus equipos ya armados . ¡Ojo! Hay una cantida maxima de equipos por persona, ¡no te lo pierdas!";
             ViewBag.Descripcion2 = "¿Queres tener un equipo soñado con tus amigos?";
             ViewBag.Descripcion22 = "Con este sitio todo es posible. Ingresando tus datos ya vas a poder cumplir tu sueño.";
+            ViewBag.Fondo = "Fondo.jpg";
             return View();
+
         }
 
         public ActionResult ValidarI(Usuario User)
@@ -26,10 +28,10 @@ namespace maketeam.Controllers
             }
             else
             {
-                int idus = BD.Loguearse(User);
-                if (idus > -1)
+                int IdUsuario = BD.Loguearse(User);
+                if (IdUsuario > -1)
                 {
-                    return View("Jugador", idus);
+                    return RedirectToAction("Jugador",new { idus = IdUsuario });
                 }
                 else 
                 {
@@ -44,7 +46,21 @@ namespace maketeam.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("Registrar", User);
+                List<Localidad> sex = new List<Localidad>();
+                sex.Add(new Localidad("Masculino"));
+                sex.Add(new Localidad("Femenino"));
+                ViewBag.sex = sex;
+
+                List<Localidad> loc = new List<Localidad>();
+                loc.Add(new Localidad("Avellaneda"));
+                loc.Add(new Localidad("Balvanera"));
+                loc.Add(new Localidad("Recoleta"));
+                loc.Add(new Localidad("Palermo"));
+                loc.Add(new Localidad("Paternal"));
+                loc.Add(new Localidad("Caballito"));
+                ViewBag.loc = loc;
+
+                return View("Registrar",User);
             }
             else
             {
@@ -59,7 +75,7 @@ namespace maketeam.Controllers
                 }
                 else
                 {
-                    return View("Registrar", User);
+                    return RedirectToAction("Registrar");
                 }
 
             }
@@ -88,7 +104,6 @@ namespace maketeam.Controllers
             loc.Add(new Localidad("Paternal"));
             loc.Add(new Localidad("Caballito"));
             ViewBag.loc = loc;
-
             return View();
         }
 
