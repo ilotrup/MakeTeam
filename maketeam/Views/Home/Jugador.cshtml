@@ -6,11 +6,23 @@
 @using maketeam.Models
 @model Usuario
 
-
-<div class="rectangulo">
+<body>
     <p>
         @ViewBag.Jugador.NombreDeUsuario
+
     </p>
-</div>
+    
+    <a href='@Url.Action("CrearEquipo","Home",new { idusuario= ViewBag.id })'>
+        <input type="submit" value="+">
+    </a>
+
+    <ul>
+        @foreach (Equipo equi in ViewBag.Equipos)
+        {
+            <h1>@equi.NombreEquipo</h1>
+
+        }
+    </ul>
+</body>
 
 

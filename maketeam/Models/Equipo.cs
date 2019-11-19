@@ -7,11 +7,10 @@ namespace maketeam.Models
 {
     public class Equipo
     {
-        private int IDEquipo;
-        private string NombreEquipo;
 
-        public int IDEquipo1 { get => IDEquipo; set => IDEquipo = value; }
-        public string NombreEquipo1 { get => NombreEquipo; set => NombreEquipo = value; }
+
+        public int IDEquipo { get; set; }
+        public string NombreEquipo { get; set; }
 
         public Equipo(int idequipo, string nombreequipo)
         {

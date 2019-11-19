@@ -142,7 +142,7 @@ namespace maketeam.Models
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
             consulta.CommandText = "Select * from Equipos where" +
-                " NombreEquipo = '" + E.NombreEquipo1 + "'";
+                " NombreEquipo = '" + E.NombreEquipo + "'";
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read())
             {

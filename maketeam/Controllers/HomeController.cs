@@ -109,10 +109,54 @@ namespace maketeam.Controllers
 
         public ActionResult Jugador(int idus)
         {
+
+            //+
+
+           
+            
+            //  Equipos
+            List<Equipo> equip = new List<Equipo>();
+            equip = BD.TraerEquipos(idus);
             ViewBag.Jugador = BD.TraerUsuario(idus);
+            ViewBag.Equipos = equip;
+            ViewBag.id = idus;
 
 
             return View();
+        }
+
+        public ActionResult CrearEquipo(int idusuario)
+        {
+            // Para prox clase faltan los filtros
+
+            return View();
+        }
+
+        public ActionResult ValidarE(Equipo equi,string nombreequipo)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("Jugador", equi);
+            }
+            else
+            {
+                bool regis1 = BD.ValidarEquipo(equi);
+                if (regis1 == true)
+                {
+
+                    BD.NuevoEquipo(nombreequipo);
+                    return View("IniciarSesion", User);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Registrar");
+                }
+
+            }
+
         }
 
 
