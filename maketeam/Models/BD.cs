@@ -135,7 +135,25 @@ namespace maketeam.Models
             Con.Close();
             return Equipos;
         }
-
+        public static Boolean ValidarEquipo(Equipo E)
+        {
+            bool Validar;
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "Select * from Equipos where" +
+                " NombreEquipo = '" + E.NombreEquipo1 + "'";
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read())
+            {
+                Validar = false;
+            }
+            else
+            {
+                Validar = true;
+            }
+            return Validar;
+        }
         public static void NuevoEquipo(string nombreequipo)
         {
             SqlConnection Con = Conectar();
