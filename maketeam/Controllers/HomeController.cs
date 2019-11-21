@@ -127,8 +127,15 @@ namespace maketeam.Controllers
 
         public ActionResult CrearEquipo(int idusuario)
         {
-            // Para prox clase faltan los filtros
+            Usuario jugador = new Usuario();
+            jugador = BD.TraerUsuario(idusuario);
+            List<Usuario> Users = new List<Usuario>();
+            Users = BD.TraerJugadoresXLocalidad(jugador.Localidad);
+            ViewBag.Jugadores = Users;
 
+
+            // Para prox clase faltan los filtros
+          
             return View();
         }
 
@@ -158,6 +165,14 @@ namespace maketeam.Controllers
             }
 
         }
+
+        public ActionResult AgregarJugadoresAlEquipo ()
+        {
+            return View();
+        }
+
+
+
 
 
         public ActionResult About()

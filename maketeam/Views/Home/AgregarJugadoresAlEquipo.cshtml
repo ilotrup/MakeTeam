@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "AgregarJugadoresAlEquipo";
+}
+@using maketeam.Models
+@model EquiposXUsuarios
+
+
+@using (Html.BeginForm("ValidarJXE", "Home", FormMethod.Post))
+{
+    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
+    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
+    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
+    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
+    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
+    <input type="submit" value="+">
+}

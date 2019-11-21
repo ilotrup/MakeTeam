@@ -201,6 +201,7 @@
     <Content Include="Views\Home\Registrar.cshtml" />
     <Content Include="Views\Home\Jugador.cshtml" />
     <Content Include="Views\Home\CrearEquipo.cshtml" />
+    <Content Include="Views\Home\AgregarJugadoresAlEquipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

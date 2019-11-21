@@ -177,5 +177,32 @@ namespace maketeam.Models
 
         }
 
+        public static List <Usuario> TraerJugadoresXLocalidad(string loc)
+        {
+            
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "SELECT from Usuarios where Localidad = '" + loc + "'";
+            SqlDataReader lector = consulta.ExecuteReader();
+            List <Usuario> Lista = new List<Usuario>();
+            Usuario User = new Usuario();
+            if (lector.Read())
+            {
+                int idusuario = Convert.ToInt32(lector["IDUsuario"]);
+                string nombreusuario = lector["TextoPregunta"].ToString();
+                string correoelectronico = lector["Dificultad"].ToString();
+                string contraseña = lector["IDUsuario"].ToString();
+                int edad = Convert.ToInt32(lector["TextoPregunta"]);
+                string localidad = lector["Dificultad"].ToString();
+                string sexo = lector["IDUsuario"].ToString();
+                User = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
+                Lista.Add(User);
+            }
+            Con.Close();
+            return Lista;
+
+        }
+
     }
 }
