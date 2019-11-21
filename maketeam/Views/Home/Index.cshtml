@@ -4,24 +4,35 @@
 
 <body style ="background-image:url('/Content/Fondo.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;" >
    
+    <p class="Tituloindex">
+        "No intentes ser el mejor del equipo, intenta que tu equipo sea el mejor"
+    </p>
     <div class="rectangulo">
-        <p>
-            @ViewBag.descripcion1
-            <a href='@Url.Action("IniciarSesion","Home")'>
-                <input type="submit" value="Iniciar sesion">
-            </a>
-
+        
+        <p class="textoindex1">
+            La vuelta de un campeón
         </p>
+        <p class="textrectangulo" >
+            @ViewBag.descripcion1
+        </p>
+        <a  href='@Url.Action("IniciarSesion","Home")'>
+            <input type="submit" value="Iniciar sesion">
+        </a>
+
     </div>
 
     <div class="rectangulo2">
-        <p>
+        <p class="textoindex2">
+          ¡Nace una estrella!
+        </p>
+        <p class="textrectangulo">
             @ViewBag.descripcion2
             @ViewBag.descripcion22
-            <a href='@Url.Action("Registrar","Home")'>
-                <input type="submit" value="Registrarse">
-            </a>
         </p>
+        <a class="botonindex" href='@Url.Action("Registrar","Home")'>
+            <input type="submit" value="Registrarse">
+        </a>
+        
     </div>
 
 </body>
