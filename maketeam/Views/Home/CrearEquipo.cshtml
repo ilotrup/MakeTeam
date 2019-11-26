@@ -10,7 +10,7 @@
 @using (Html.BeginForm("ValidarE", "Home", FormMethod.Post))
 {
     <p>Ingrese nombre del equipo</p>@Html.TextBoxFor(model => model.NombreEquipo)@Html.ValidationMessageFor(model => model.NombreEquipo) <br />
-    <input type="submit" value="+">
+    <input type="submit" value="Crear">
 
 }
 

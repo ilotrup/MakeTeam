@@ -127,49 +127,56 @@ namespace maketeam.Controllers
 
         public ActionResult CrearEquipo(int idusuario)
         {
+            // Para prox clase faltan los filtros
+          
+            return View(idusuario);
+        }
+
+        public ActionResult ValidarE(Equipo equi, int idusuario)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("CrearEquipo");
+            }
+            else
+            {
+                bool regis1 = BD.ValidarEquipo(equi);
+                if (regis1 == false)
+                {
+
+                    BD.NuevoEquipo(equi.NombreEquipo);
+                    return View("AgregarJugadoresAlEquipo", equi, idusuario);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("CrearEquipo");
+                }
+
+            }
+
+        }
+
+       
+
+        public ActionResult AgregarJugadoresAlEquipo (Equipo equi, int idusuario)
+        {
             Usuario jugador = new Usuario();
             jugador = BD.TraerUsuario(idusuario);
             List<Usuario> Users = new List<Usuario>();
             Users = BD.TraerJugadoresXLocalidad(jugador.Localidad);
             ViewBag.Jugadores = Users;
 
-
-            // Para prox clase faltan los filtros
-          
             return View();
         }
 
-        public ActionResult ValidarE(Equipo equi,string nombreequipo)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return View("Jugador", equi);
-            }
-            else
-            {
-                bool regis1 = BD.ValidarEquipo(equi);
-                if (regis1 == true)
-                {
-
-                    BD.NuevoEquipo(nombreequipo);
-                    return View("IniciarSesion", User);
-
-
-                }
-                else
-                {
-                    return RedirectToAction("Registrar");
-                }
-
-            }
-
-        }
-
-        public ActionResult AgregarJugadoresAlEquipo ()
+        public ActionResult ValidarJXE()
         {
             return View();
         }
+
 
 
 

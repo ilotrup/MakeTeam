@@ -183,19 +183,19 @@ namespace maketeam.Models
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "SELECT from Usuarios where Localidad = '" + loc + "'";
+            consulta.CommandText = "SELECT * from Usuarios where Localidad = '" + loc + "'";
             SqlDataReader lector = consulta.ExecuteReader();
             List <Usuario> Lista = new List<Usuario>();
             Usuario User = new Usuario();
             if (lector.Read())
             {
                 int idusuario = Convert.ToInt32(lector["IDUsuario"]);
-                string nombreusuario = lector["TextoPregunta"].ToString();
-                string correoelectronico = lector["Dificultad"].ToString();
-                string contraseña = lector["IDUsuario"].ToString();
-                int edad = Convert.ToInt32(lector["TextoPregunta"]);
-                string localidad = lector["Dificultad"].ToString();
-                string sexo = lector["IDUsuario"].ToString();
+                string nombreusuario = lector["NombreDeUsuario"].ToString();
+                string correoelectronico = lector["CorreoElectronico"].ToString();
+                string contraseña = lector["Contraseña"].ToString();
+                int edad = Convert.ToInt32(lector["Edad"]);
+                string localidad = lector["Localidad"].ToString();
+                string sexo = lector["Sexo"].ToString();
                 User = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
                 Lista.Add(User);
             }
