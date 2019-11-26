@@ -31,6 +31,7 @@ namespace maketeam.Controllers
                 int IdUsuario = BD.Loguearse(User);
                 if (IdUsuario > -1)
                 {
+                    Session["usuario"] = IdUsuario;
                     return RedirectToAction("Jugador",new { idus = IdUsuario });
                 }
                 else 
@@ -132,7 +133,7 @@ namespace maketeam.Controllers
             return View(idusuario);
         }
 
-        public ActionResult ValidarE(Equipo equi, int idusuario)
+        public ActionResult ValidarE(Equipo equi)
         {
 
             if (!ModelState.IsValid)
@@ -146,7 +147,8 @@ namespace maketeam.Controllers
                 {
 
                     BD.NuevoEquipo(equi.NombreEquipo);
-                    return View("AgregarJugadoresAlEquipo", equi, idusuario);
+                    //int idusuario = Convert.ToInt32(Session["usuario"]);
+                    return View("AgregarJugadoresAlEquipo", equi);
 
 
                 }
