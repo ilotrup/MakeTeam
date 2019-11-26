@@ -2,20 +2,23 @@
     ViewBag.Title = "Home Page";
 }
 
-<body style ="background-image:url('/Content/Fondo.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;" >
-   
+<body style="background-image:url('/Content/Fondo.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;">
+
     <p class="Tituloindex">
         "No intentes ser el mejor del equipo, intenta que tu equipo sea el mejor"
     </p>
+
+    <img class="FotoIndex" align="top" src="~/Content/LogoMakeTeam1.jpg" alt="Logo Make Team" />
+
     <div class="rectangulo">
-        
+
         <p class="textoindex1">
             La vuelta de un campeón
         </p>
-        <p class="textrectangulo" >
+        <p class="textrectangulo">
             @ViewBag.descripcion1
         </p>
-        <a  href='@Url.Action("IniciarSesion","Home")'>
+        <a href='@Url.Action("IniciarSesion","Home")'>
             <input type="submit" value="Iniciar sesion">
         </a>
 
@@ -23,7 +26,7 @@
 
     <div class="rectangulo2">
         <p class="textoindex2">
-          ¡Nace una estrella!
+            ¡Nace una estrella!
         </p>
         <p class="textrectangulo">
             @ViewBag.descripcion2
@@ -32,7 +35,7 @@
         <a class="botonindex" href='@Url.Action("Registrar","Home")'>
             <input type="submit" value="Registrarse">
         </a>
-        
+
     </div>
 
 </body>
