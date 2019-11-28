@@ -4,17 +4,20 @@
 
 @using maketeam.Models
 @model Usuario
+<<body style="background-image:url('/Content/Registrarse.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;">
+    @using (Html.BeginForm("ValidarR", "Home", FormMethod.Post))
+    {
+     <div class="rectanguloregis">
+         <p class="textoindex1">Usuario</p>@Html.TextBoxFor(model => model.NombreDeUsuario)@Html.ValidationMessageFor(model => model.NombreDeUsuario) <br />
+         <p class="textoindex1">Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña) <br />
+         <p class="textoindex1">Correo Electronico</p> @Html.TextBoxFor(model => model.CorreoElectronico)@Html.ValidationMessageFor(model => model.CorreoElectronico) <br />
+         <p class="textoindex1">Sexo</p>@Html.DropDownListFor(model => model.Sexo, new SelectList(ViewBag.sex, "Nombre", "Nombre"))
+         <p class="textoindex1">Edad</p> @Html.TextBoxFor(model => model.Edad)@Html.ValidationMessageFor(model => model.Edad) <br />
+         @Html.DropDownListFor(model => model.Localidad, new SelectList(ViewBag.loc, "Nombre", "Nombre"))
 
-@using (Html.BeginForm("ValidarR", "Home", FormMethod.Post))
-{
-    <p>Usuario</p>@Html.TextBoxFor(model => model.NombreDeUsuario)@Html.ValidationMessageFor(model => model.NombreDeUsuario) <br />
-    <p>Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña) <br />
-    <p>Correo Electronico</p> @Html.TextBoxFor(model => model.CorreoElectronico)@Html.ValidationMessageFor(model => model.CorreoElectronico) <br />
-    @Html.DropDownListFor(model => model.Sexo, new SelectList(ViewBag.sex, "Nombre", "Nombre"))
-    <p>Edad</p> @Html.TextBoxFor(model => model.Edad)@Html.ValidationMessageFor(model => model.Edad) <br />
-    @Html.DropDownListFor(model => model.Localidad, new SelectList(ViewBag.loc, "Nombre", "Nombre"))
 
 
-
-    <input type="submit" value="Registrar">
-}
+         <input type="submit" value="Registrar">
+     </div>
+    }
+    </body>

@@ -17,7 +17,7 @@
     display: inline-block;
     text-align: center;
     position: relative;
-    left: 28em;
+    left: 23em;
     bottom: -8.6em;
 }
 
@@ -52,7 +52,7 @@
 
 .Tituloindex {
     margin-left: 167px;
-    margin-top: 200px;
+    margin-top: 100px;
     font-size: 2em;
     font-family: fantasy;
 }
@@ -69,8 +69,10 @@ body {
 }
 
 .FotoIndex {
-    WIDTH: 150px;
-    HEIGHT: 150px;
+    WIDTH: 50px;
+    HEIGHT: 50px;
+    margin-left:643px;
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -84,6 +86,27 @@ body {
 */
 .dl-horizontal dt {
     white-space: normal;
+}
+
+.rectangulologin {
+    width: 300px;
+    height: 169px;
+    background: white;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    left: 15em;
+    bottom: -7em;
+}
+.rectanguloregis {
+    width: 300px;
+    height: 366px;
+    background: white;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    left: 15em;
+    bottom: -7em;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
