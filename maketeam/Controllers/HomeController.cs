@@ -195,15 +195,15 @@ namespace maketeam.Controllers
             return View();
         }
 
-        public ActionResult ValidarJXE()
+        [HttpPost]
+        public ActionResult ValidarJXE(JugadoresXE jugs)
         {
-            JugadoresXE jugs = new JugadoresXE();
             BD.InsertarJugadores(jugs.Jugador1, Convert.ToInt32(Session["equipact"]));
             BD.InsertarJugadores(jugs.Jugador2, Convert.ToInt32(Session["equipact"]));
             BD.InsertarJugadores(jugs.Jugador3, Convert.ToInt32(Session["equipact"]));
             BD.InsertarJugadores(jugs.Jugador4, Convert.ToInt32(Session["equipact"]));
             BD.InsertarJugadores(jugs.Jugador5, Convert.ToInt32(Session["equipact"]));
-            return View();
+            return RedirectToAction("Jugador", new {idus = Convert.ToInt32(Session["usuarioact"])});
         }
 
 

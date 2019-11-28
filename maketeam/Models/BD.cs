@@ -205,14 +205,14 @@ namespace maketeam.Models
             consulta.ExecuteNonQuery();
             Con.Close();
         }
-        public static void InsertarJugadores(Usuario us,int ID)
+        public static void InsertarJugadores(int us,int ID)
         {
            
           
                 SqlConnection Con = Conectar();
                 SqlCommand consulta = Con.CreateCommand();
                 consulta.CommandType = System.Data.CommandType.Text;
-                consulta.CommandText = "insert into EquiposXUsuarios(IDUsuario,IDEquipo) values ('" + us.IDUsuario +"','" + ID + "')";
+                consulta.CommandText = "insert into EquiposXUsuario(IDUsuario,IDEquipo) values (" + us +"," + ID + ")";
                 consulta.ExecuteNonQuery();
                 Con.Close();
         
