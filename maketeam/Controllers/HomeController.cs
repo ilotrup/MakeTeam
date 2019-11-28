@@ -22,8 +22,9 @@ namespace maketeam.Controllers
 
         public ActionResult quienes()
         {
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             ViewBag.TituloQuienes = "Nosotros somos MakeTeam, un grupo de 4 amigos que queremos resolver una problematica.";
-            ViewBag.DescripcionQuienes = "Nuestra idea empieza de una experiencia cuando no completabamos equipo para ir a jgar al futbol. Con esta problematica pudimos crear esto. NOsotros queremos beneficiar a todo tipo de personas ya que como les puede pasar a ustedes, tambien nos puede pasar a nosotros."
+            ViewBag.DescripcionQuienes = "Nuestra idea empieza de una experiencia cuando no completabamos equipo para ir a jgar al futbol. Con esta problematica pudimos crear esto. NOsotros queremos beneficiar a todo tipo de personas ya que como les puede pasar a ustedes, tambien nos puede pasar a nosotros.";
             ViewBag.FotoAle = "";
             ViewBag.FotoIlan = "";
             ViewBag.FotoGluk = "";
@@ -107,7 +108,7 @@ namespace maketeam.Controllers
 
         public ActionResult Registrar()
         {
-
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             List<Localidad> sex = new List<Localidad>();
             sex.Add(new Localidad("Masculino"));
             sex.Add(new Localidad("Femenino"));
@@ -126,11 +127,11 @@ namespace maketeam.Controllers
 
         public ActionResult Jugador(int idus)
         {
-
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             //+
 
-           
-            
+
+
             //  Equipos
             List<Equipo> equip = new List<Equipo>();
             equip = BD.TraerEquipos(idus);
@@ -145,7 +146,7 @@ namespace maketeam.Controllers
         public ActionResult CrearEquipo()
         {
             // Para prox clase faltan los filtros
-          
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             return View();
         }
 
@@ -166,6 +167,12 @@ namespace maketeam.Controllers
                     int IDEquip = BD.TraerIDEquipo(equi.NombreEquipo);
                     Session["equipact"] = IDEquip;
                     //int idusuario = Convert.ToInt32(Session["usuario"]);
+                    ViewBag.Logo = "LogoMakeTeam1.jpg";
+                    Usuario jugador = new Usuario();
+                    jugador = BD.TraerUsuario(Convert.ToInt32(Session["usuarioact"]));
+                    List<Usuario> Users = new List<Usuario>();
+                    Users = BD.TraerJugadoresXLocalidad(jugador.Localidad);
+                    ViewBag.Jugadores = Users;
                     return View("AgregarJugadoresAlEquipo");
 
 
@@ -183,17 +190,19 @@ namespace maketeam.Controllers
 
         public ActionResult AgregarJugadoresAlEquipo()
         {
-            Usuario jugador = new Usuario();
-            jugador = BD.TraerUsuario(Convert.ToInt32(Session["usuarioact"]));
-            List<Usuario> Users = new List<Usuario>();
-            Users = BD.TraerJugadoresXLocalidad(jugador.Localidad);
-            ViewBag.Jugadores = Users;
+
 
             return View();
         }
 
         public ActionResult ValidarJXE()
         {
+            JugadoresXE jugs = new JugadoresXE();
+            BD.InsertarJugadores(jugs.Jugador1, Convert.ToInt32(Session["equipact"]));
+            BD.InsertarJugadores(jugs.Jugador2, Convert.ToInt32(Session["equipact"]));
+            BD.InsertarJugadores(jugs.Jugador3, Convert.ToInt32(Session["equipact"]));
+            BD.InsertarJugadores(jugs.Jugador4, Convert.ToInt32(Session["equipact"]));
+            BD.InsertarJugadores(jugs.Jugador5, Convert.ToInt32(Session["equipact"]));
             return View();
         }
 
@@ -204,6 +213,7 @@ namespace maketeam.Controllers
 
         public ActionResult About()
         {
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -211,6 +221,7 @@ namespace maketeam.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             ViewBag.Message = "Your contact page.";
 
             return View();

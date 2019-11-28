@@ -125,7 +125,7 @@ namespace maketeam.Models
             consulta.CommandText = "select * from Equipos inner join" +
                 " EquiposXUsuario on Equipos.IDEquipo = EquiposXUsuario.IDEquipo where IDUsuario = '" + ID +"'";
             SqlDataReader lector = consulta.ExecuteReader();
-            if (lector.Read())
+            while (lector.Read())
             {
                 int idequipo = Convert.ToInt32(lector["IDEquipo"]);
                 string nombreequipo = lector["NombreEquipo"].ToString();
@@ -205,17 +205,17 @@ namespace maketeam.Models
             consulta.ExecuteNonQuery();
             Con.Close();
         }
-        public static void InsertarJugadores(List<Usuario> Lista,int ID)
+        public static void InsertarJugadores(Usuario us,int ID)
         {
-            foreach(Usuario E in Lista)
-            {
+           
+          
                 SqlConnection Con = Conectar();
                 SqlCommand consulta = Con.CreateCommand();
                 consulta.CommandType = System.Data.CommandType.Text;
-                consulta.CommandText = "insert into EquiposXUsuarios(IDUsuario,IDEquipo) values ('" + E.IDUsuario +"','" + ID + "')";
+                consulta.CommandText = "insert into EquiposXUsuarios(IDUsuario,IDEquipo) values ('" + us.IDUsuario +"','" + ID + "')";
                 consulta.ExecuteNonQuery();
                 Con.Close();
-            }
+        
 
         }
 
@@ -229,7 +229,7 @@ namespace maketeam.Models
             SqlDataReader lector = consulta.ExecuteReader();
             List <Usuario> Lista = new List<Usuario>();
             Usuario User = new Usuario();
-            if (lector.Read())
+            while (lector.Read())
             {
                 int idusuario = Convert.ToInt32(lector["IDUsuario"]);
                 string nombreusuario = lector["NombreDeUsuario"].ToString();

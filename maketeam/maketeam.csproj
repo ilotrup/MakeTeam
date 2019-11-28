@@ -155,6 +155,7 @@
     <Compile Include="Models\Desafio.cs" />
     <Compile Include="Models\Equipo.cs" />
     <Compile Include="Models\EquiposXUsuarios.cs" />
+    <Compile Include="Models\JugadoresXE.cs" />
     <Compile Include="Models\Localidad.cs" />
     <Compile Include="Models\Sexo.cs" />
     <Compile Include="Models\Usuario.cs" />
