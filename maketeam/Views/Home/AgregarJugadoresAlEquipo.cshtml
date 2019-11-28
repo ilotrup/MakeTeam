@@ -8,10 +8,6 @@
 
 @using (Html.BeginForm("ValidarJXE", "Home", FormMethod.Post))
 {
-    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
-    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
-    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
-    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
-    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "Nombre", "IDUsuario")) <br />
+    @Html.DropDownListFor(model => model.IDUsuario, new SelectList(ViewBag.Jugadores, "IDUsuario", "NombreDeUsuario")) <br />
     <input type="submit" value="+">
 }

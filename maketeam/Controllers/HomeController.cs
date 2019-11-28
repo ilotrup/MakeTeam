@@ -31,7 +31,7 @@ namespace maketeam.Controllers
                 int IdUsuario = BD.Loguearse(User);
                 if (IdUsuario > -1)
                 {
-                    Session["usuario"] = IdUsuario;
+                    Session["usuarioact"] = IdUsuario;
                     return RedirectToAction("Jugador",new { idus = IdUsuario });
                 }
                 else 
@@ -126,11 +126,11 @@ namespace maketeam.Controllers
             return View();
         }
 
-        public ActionResult CrearEquipo(int idusuario)
+        public ActionResult CrearEquipo()
         {
             // Para prox clase faltan los filtros
           
-            return View(idusuario);
+            return View();
         }
 
         public ActionResult ValidarE(Equipo equi)
@@ -147,8 +147,10 @@ namespace maketeam.Controllers
                 {
 
                     BD.NuevoEquipo(equi.NombreEquipo);
+                    int IDEquip = BD.TraerIDEquipo(equi.NombreEquipo);
+                    Session["equipact"] = IDEquip;
                     //int idusuario = Convert.ToInt32(Session["usuario"]);
-                    return View("AgregarJugadoresAlEquipo", equi);
+                    return View("AgregarJugadoresAlEquipo");
 
 
                 }
@@ -163,10 +165,10 @@ namespace maketeam.Controllers
 
        
 
-        public ActionResult AgregarJugadoresAlEquipo (Equipo equi, int idusuario)
+        public ActionResult AgregarJugadoresAlEquipo()
         {
             Usuario jugador = new Usuario();
-            jugador = BD.TraerUsuario(idusuario);
+            jugador = BD.TraerUsuario(Convert.ToInt32(Session["usuarioact"]));
             List<Usuario> Users = new List<Usuario>();
             Users = BD.TraerJugadoresXLocalidad(jugador.Localidad);
             ViewBag.Jugadores = Users;

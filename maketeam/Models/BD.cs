@@ -102,12 +102,12 @@ namespace maketeam.Models
             if (lector.Read())
             {
                 int idusuario = Convert.ToInt32(lector["IDUsuario"]);
-                string nombreusuario = lector["TextoPregunta"].ToString();
-                string correoelectronico = lector["Dificultad"].ToString();
-                string contraseña = lector["IDUsuario"].ToString();
-                int edad = Convert.ToInt32(lector["TextoPregunta"]);
-                string localidad = lector["Dificultad"].ToString();
-                string sexo = lector["IDUsuario"].ToString();
+                string nombreusuario = lector["NombreDeUsuario"].ToString();
+                string correoelectronico = lector["CorreoElectronico"].ToString();
+                string contraseña = lector["Contraseña"].ToString();
+                int edad = Convert.ToInt32(lector["Edad"]);
+                string localidad = lector["Localidad"].ToString();
+                string sexo = lector["Sexo"].ToString();
                 User = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
             }
             Con.Close();
@@ -135,6 +135,48 @@ namespace maketeam.Models
             Con.Close();
             return Equipos;
         }
+
+        public static List<Usuario> TraerEquipo(int ID)
+        {
+            List<Usuario> Usuarios = new List<Usuario>();
+            Usuario user = new Usuario();
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "select * from Usuarios inner join EquiposXUsuarios on EquiposXUsuarios.IDUsuario = Usuarios.IDUsuario where EquiposXUsuarios.IDEquipo = " + ID + "";
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read())
+            {
+                int idusuario = Convert.ToInt32(lector["IDUsuario"]);
+                string nombreusuario = lector["NombreDeUsuario"].ToString();
+                string correoelectronico = lector["CorreoElectronico"].ToString();
+                string contraseña = lector["Contraseña"].ToString();
+                int edad = Convert.ToInt32(lector["Edad"]);
+                string localidad = lector["Localidad"].ToString();
+                string sexo = lector["Sexo"].ToString();
+                user = new Usuario(idusuario, nombreusuario, correoelectronico, contraseña, edad, localidad, sexo);
+                Usuarios.Add(user);
+            }
+            Con.Close();
+            return Usuarios;
+        }
+
+        public static int TraerIDEquipo(string N)
+        {
+            Equipo E = new Equipo();
+            int idequipo = -1;
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "select * from Equipos where NombreEquipo = '" + N + "'";
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read())
+            {
+                idequipo = Convert.ToInt32(lector["IDEquipo"]);
+            }
+            Con.Close();
+            return idequipo;
+        }
         public static Boolean ValidarEquipo(Equipo E)
         {
             bool Validar;
@@ -146,11 +188,11 @@ namespace maketeam.Models
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read())
             {
-                Validar = false;
+                Validar = true;
             }
             else
             {
-                Validar = true;
+                Validar = false;
             }
             return Validar;
         }
