@@ -15,8 +15,24 @@ namespace maketeam.Controllers
             ViewBag.Descripcion2 = "¿Queres tener un equipo soñado con tus amigos?";
             ViewBag.Descripcion22 = "Con este sitio todo es posible. Ingresando tus datos ya vas a poder cumplir tu sueño.";
             ViewBag.Fondo = "Fondo.jpg";
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             return View();
 
+        }
+
+        public ActionResult quienes()
+        {
+            ViewBag.TituloQuienes = "Nosotros somos MakeTeam, un grupo de 4 amigos que queremos resolver una problematica.";
+            ViewBag.DescripcionQuienes = "Nuestra idea empieza de una experiencia cuando no completabamos equipo para ir a jgar al futbol. Con esta problematica pudimos crear esto. NOsotros queremos beneficiar a todo tipo de personas ya que como les puede pasar a ustedes, tambien nos puede pasar a nosotros."
+            ViewBag.FotoAle = "";
+            ViewBag.FotoIlan = "";
+            ViewBag.FotoGluk = "";
+            ViewBag.FotoNico = "";
+            ViewBag.LogoQuienes = "LogoMakeTeam1.jpg";
+
+
+
+            return View();
         }
 
         public ActionResult ValidarI(Usuario User)
@@ -85,7 +101,7 @@ namespace maketeam.Controllers
 
         public ActionResult IniciarSesion()
         {
-
+            ViewBag.Logo = "LogoMakeTeam1.jpg";
             return View();
         }
 
