@@ -5,13 +5,13 @@
 @using maketeam.Models
 @model Equipo
 
+<body style="background-image:url('/Content/Fondo.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;">
 
+    @using (Html.BeginForm("ValidarE", "Home", FormMethod.Post))
+    {
+        <h1>Ingrese nombre del equipo</h1>@Html.TextBoxFor(model => model.NombreEquipo)@Html.ValidationMessageFor(model => model.NombreEquipo) <br />
+        <input type="submit" value="Crear">
 
-@using (Html.BeginForm("ValidarE", "Home", FormMethod.Post))
-{
-    <p>Ingrese nombre del equipo</p>@Html.TextBoxFor(model => model.NombreEquipo)@Html.ValidationMessageFor(model => model.NombreEquipo) <br />
-    <input type="submit" value="Crear">
-
-}
+    }
 
 

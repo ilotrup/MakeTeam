@@ -3,21 +3,23 @@
     ViewBag.Title = "MostrarEquipo";
 }
 
-@using maketeam.Models
+<body style="background-image:url('/Content/Fondo.jpg');background-attachment: fixed;background-repeat: no-repeat;background-size: cover;">
+
+    @using maketeam.Models
 
 
-<body>
-    <h1>
-        @ViewBag.Equi
+    <body>
+        <h1>
+            El Equipo al Cual representaran va a ser: @ViewBag.Equi
 
-    </h1>
+        </h1>
 
-    @foreach (Usuario us in ViewBag.Jugs)
-    {
-        <p>@us.NombreDeUsuario</p> 
+        @foreach (Usuario us in ViewBag.Jugs)
+        {
+            <p>El Nombre del usuario es: @us.NombreDeUsuario</p>
 
-    }
+        }
 
-</body>
+    </body>
 
 

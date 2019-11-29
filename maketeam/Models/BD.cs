@@ -10,7 +10,7 @@ namespace maketeam.Models
     {
         private static SqlConnection Conectar()
         {
-            string constring = "Server=.; DataBase = MakeTeam; User id=alumno; Password=alumno1;";
+            string constring = "Server=.; DataBase = MakeTeam; User id=alumno; Password=alumno;";
             SqlConnection a = new SqlConnection(constring);
             a.Open();
             return a;
