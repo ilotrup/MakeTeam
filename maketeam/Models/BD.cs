@@ -143,9 +143,9 @@ namespace maketeam.Models
             SqlConnection Con = Conectar();
             SqlCommand consulta = Con.CreateCommand();
             consulta.CommandType = System.Data.CommandType.Text;
-            consulta.CommandText = "select * from Usuarios inner join EquiposXUsuarios on EquiposXUsuarios.IDUsuario = Usuarios.IDUsuario where EquiposXUsuarios.IDEquipo = " + ID + "";
+            consulta.CommandText = "select * from Usuarios inner join EquiposXUsuario on EquiposXUsuario.IDUsuario = Usuarios.IDUsuario where EquiposXUsuario.IDEquipo = " + ID + "";
             SqlDataReader lector = consulta.ExecuteReader();
-            if (lector.Read())
+            while (lector.Read())
             {
                 int idusuario = Convert.ToInt32(lector["IDUsuario"]);
                 string nombreusuario = lector["NombreDeUsuario"].ToString();
@@ -177,6 +177,26 @@ namespace maketeam.Models
             Con.Close();
             return idequipo;
         }
+
+
+        public static string TraerNombreEquipo(int N)
+        {
+            Equipo E = new Equipo();
+            string nombreequipo = "";
+            SqlConnection Con = Conectar();
+            SqlCommand consulta = Con.CreateCommand();
+            consulta.CommandType = System.Data.CommandType.Text;
+            consulta.CommandText = "select * from Equipos where IDEquipo = " + N;
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read())
+            {
+                nombreequipo = lector["NombreEquipo"].ToString();
+            }
+            Con.Close();
+            return nombreequipo;
+        }
+
+
         public static Boolean ValidarEquipo(Equipo E)
         {
             bool Validar;

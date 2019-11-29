@@ -16,13 +16,13 @@
         <input type="submit" value="+">
     </a>
 
-    <ul>
+    
         @foreach (Equipo equi in ViewBag.Equipos)
         {
-            <h1>@equi.NombreEquipo</h1>
+            <a href='@Url.Action("MostrarEquipo", "Home",new { idequip= equi.IDEquipo })'><p>@equi.NombreEquipo</p> </a>
 
         }
-    </ul>
+    
 </body>
 
 

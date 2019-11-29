@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "MostrarEquipo";
+}
+
+@using maketeam.Models
+
+
+<body>
+    <h1>
+        @ViewBag.Equi
+
+    </h1>
+
+    @foreach (Usuario us in ViewBag.Jugs)
+    {
+        <p>@us.NombreDeUsuario</p> 
+
+    }
+
+</body>
+
+
